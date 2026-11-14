@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cb0g5xmou3yir"]
+
+[ext_resource type="Texture2D" uid="uid://kxirhaugllpn" path="res://icon.svg" id="1_h2yge"]
+[ext_resource type="Texture2D" uid="uid://cx0ia7wud5ibr" path="res://star charcter.png" id="2_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://omqh11mm11q7" path="res://Trampoline.png" id="3_lquwl"]
+
+[node name="Main" type="Node2D" unique_id=925031726]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=214007647]
+scale = Vector2(100, 100)
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=433874199]
+texture = ExtResource("1_h2yge")
+
+[node name="StarCharcter2" type="Sprite2D" parent="." unique_id=1903608698]
+texture_filter = 1
+position = Vector2(-10907.001, -43884)
+scale = Vector2(588, 559.99994)
+texture = ExtResource("2_1bvp3")
+
+[node name="Trampoline" type="Sprite2D" parent="." unique_id=337706850]
+texture_filter = 1
+position = Vector2(-11833, -32981.004)
+scale = Vector2(238.90433, 171.53123)
+texture = ExtResource("3_lquwl")
