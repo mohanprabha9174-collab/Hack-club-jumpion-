@@ -2,14 +2,152 @@
 
 [ext_resource type="Texture2D" uid="uid://cx0ia7wud5ibr" path="res://star charcter.png" id="1_0e48y"]
 [ext_resource type="Texture2D" uid="uid://omqh11mm11q7" path="res://Trampoline.png" id="2_epypp"]
+[ext_resource type="Texture2D" uid="uid://b6s1bajq06ei2" path="res://finalmapmaybe.png" id="3_epypp"]
 
 [node name="Node2D" type="Node2D" unique_id=987453273]
 
 [node name="StarCharcter" type="Sprite2D" parent="." unique_id=1508527613]
-position = Vector2(172.00005, 214)
+light_mask = 512
+visibility_layer = 512
+z_index = 1
+texture_filter = 1
+position = Vector2(980, -426)
 scale = Vector2(1.46875, 1.5)
 texture = ExtResource("1_0e48y")
 
 [node name="Trampoline" type="Sprite2D" parent="." unique_id=623080540]
-position = Vector2(80, 216)
+z_index = 1
+texture_filter = 1
+position = Vector2(913, -413)
+scale = Vector2(1, 0.625)
 texture = ExtResource("2_epypp")
+
+[node name="Finalmapmaybe" type="Sprite2D" parent="." unique_id=180361815]
+texture_filter = 1
+position = Vector2(930, -5281)
+texture = ExtResource("3_epypp")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=780114785]
+position = Vector2(950, -516)
+zoom = Vector2(1.4, 1.4)
+
+[node name="Trampoline2" type="Sprite2D" parent="." unique_id=480518468]
+position = Vector2(892, -976.25)
+scale = Vector2(1, 0.49218777)
+texture = ExtResource("2_epypp")
+
+[node name="StarCharcter2" type="Sprite2D" parent="." unique_id=613283895]
+position = Vector2(943, -971)
+texture = ExtResource("1_0e48y")
+
+[node name="Trampoline3" type="Sprite2D" parent="." unique_id=252570957]
+position = Vector2(946, -1102)
+scale = Vector2(1, 0.40625)
+texture = ExtResource("2_epypp")
+
+[node name="StarCharcter3" type="Sprite2D" parent="." unique_id=427268795]
+position = Vector2(998, -1099)
+texture = ExtResource("1_0e48y")
+
+[node name="Trampoline4" type="Sprite2D" parent="." unique_id=787998633]
+position = Vector2(831, -1254)
+scale = Vector2(1, 0.59375)
+texture = ExtResource("2_epypp")
+
+[node name="StarCharcter4" type="Sprite2D" parent="." unique_id=1433658115]
+position = Vector2(895, -1266)
+texture = ExtResource("1_0e48y")
+
+[node name="Trampoline5" type="Sprite2D" parent="." unique_id=546712753]
+position = Vector2(848, -1583.5)
+scale = Vector2(1, 0.515625)
+texture = ExtResource("2_epypp")
+
+[node name="StarCharcter5" type="Sprite2D" parent="." unique_id=246805177]
+position = Vector2(915, -1595)
+texture = ExtResource("1_0e48y")
+
+[node name="Trampoline6" type="Sprite2D" parent="." unique_id=2122988639]
+position = Vector2(855.00006, -1877)
+scale = Vector2(0.5781255, 0.35937512)
+texture = ExtResource("2_epypp")
+
+[node name="StarCharcter6" type="Sprite2D" parent="." unique_id=503235587]
+position = Vector2(953, -1875)
+texture = ExtResource("1_0e48y")
+
+[node name="Trampoline7" type="Sprite2D" parent="." unique_id=312032571]
+position = Vector2(788, -1970)
+scale = Vector2(1, 0.5)
+texture = ExtResource("2_epypp")
+
+[node name="StarCharcter7" type="Sprite2D" parent="." unique_id=994018264]
+position = Vector2(843, -1967)
+texture = ExtResource("1_0e48y")
+
+[node name="Trampoline8" type="Sprite2D" parent="." unique_id=1787921189]
+position = Vector2(822, -2118)
+scale = Vector2(0.6875, 0.40625238)
+texture = ExtResource("2_epypp")
+
+[node name="StarCharcter8" type="Sprite2D" parent="." unique_id=59597684]
+position = Vector2(862, -2115)
+texture = ExtResource("1_0e48y")
+
+[node name="Trampoline9" type="Sprite2D" parent="." unique_id=1147595159]
+position = Vector2(869, -2415)
+scale = Vector2(1, 0.5)
+texture = ExtResource("2_epypp")
+
+[node name="StarCharcter9" type="Sprite2D" parent="." unique_id=947752756]
+position = Vector2(931, -2409)
+texture = ExtResource("1_0e48y")
+
+[node name="Trampoline10" type="Sprite2D" parent="." unique_id=2105744022]
+position = Vector2(843, -2642)
+scale = Vector2(0.90625, 0.5625)
+texture = ExtResource("2_epypp")
+
+[node name="StarCharcter10" type="Sprite2D" parent="." unique_id=887355637]
+position = Vector2(900, -2638)
+texture = ExtResource("1_0e48y")
+
+[node name="Trampoline11" type="Sprite2D" parent="." unique_id=1912048795]
+position = Vector2(789, -2984)
+scale = Vector2(1, 0.5625)
+texture = ExtResource("2_epypp")
+
+[node name="StarCharcter11" type="Sprite2D" parent="." unique_id=691878768]
+position = Vector2(856, -2991)
+texture = ExtResource("1_0e48y")
+
+[node name="Trampoline12" type="Sprite2D" parent="." unique_id=909443933]
+position = Vector2(861, -3293.5)
+scale = Vector2(1, 0.484375)
+texture = ExtResource("2_epypp")
+
+[node name="StarCharcter12" type="Sprite2D" parent="." unique_id=914578265]
+position = Vector2(921, -3291)
+texture = ExtResource("1_0e48y")
+
+[node name="Trampoline13" type="Sprite2D" parent="." unique_id=1207376254]
+position = Vector2(837, -3656.5)
+scale = Vector2(0.84375, 0.515625)
+texture = ExtResource("2_epypp")
+
+[node name="StarCharcter13" type="Sprite2D" parent="." unique_id=189269692]
+position = Vector2(893, -3651)
+texture = ExtResource("1_0e48y")
+
+[node name="Trampoline14" type="Sprite2D" parent="." unique_id=1741658879]
+position = Vector2(849.5, -3897)
+scale = Vector2(0.890625, 0.53125)
+texture = ExtResource("2_epypp")
+
+[node name="StarCharcter14" type="Sprite2D" parent="." unique_id=1274030000]
+position = Vector2(907, -3899)
+texture = ExtResource("1_0e48y")
+
+[node name="StarCharcter15" type="Sprite2D" parent="." unique_id=774274458]
+position = Vector2(887, -4386)
+texture = ExtResource("1_0e48y")
