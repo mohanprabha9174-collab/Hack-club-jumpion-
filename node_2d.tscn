@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cx0ia7wud5ibr" path="res://star charcter.png" id="1_0e48y"]
 [ext_resource type="Texture2D" uid="uid://omqh11mm11q7" path="res://Trampoline.png" id="2_epypp"]
 [ext_resource type="Texture2D" uid="uid://b6s1bajq06ei2" path="res://finalmapmaybe.png" id="3_epypp"]
-[ext_resource type="Texture2D" uid="uid://ptiwsa887ohn" path="res://Screenshot 2026-11-14 184933.png" id="4_0hol4"]
+[ext_resource type="Texture2D" uid="uid://bexys766jtbdf" path="res://Screenshot 2026-11-14 184933.png" id="4_0hol4"]
 [ext_resource type="Script" uid="uid://bkv5aqabnrub4" path="res://timer.gd" id="4_q6r6c"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6pmnr"]
@@ -46,8 +46,8 @@ position = Vector2(930, -5281)
 texture = ExtResource("3_epypp")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=780114785]
-position = Vector2(916, -507)
-zoom = Vector2(1.4, 1.4)
+position = Vector2(909, -4416)
+zoom = Vector2(2.5, 2.5)
 
 [node name="Trampoline2" type="Sprite2D" parent="." unique_id=480518468]
 position = Vector2(892, -976.25)
@@ -167,16 +167,11 @@ position = Vector2(907, -3899)
 texture = ExtResource("1_0e48y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1146132626]
-position = Vector2(881, -4389.0005)
+position = Vector2(877, -4389)
 scale = Vector2(1.25, 1.3593702)
 sprite_frames = SubResource("SpriteFrames_6pmnr")
 frame = 1
-frame_progress = 0.13278498
-
-[node name="Screenshot20261114184933" type="Sprite2D" parent="." unique_id=976250724]
-position = Vector2(2026, -506)
-scale = Vector2(0.30788803, 0.2712766)
-texture = ExtResource("4_0hol4")
+frame_progress = 0.08516169
 
 [node name="Timer" type="Timer" parent="." unique_id=1388677407]
 wait_time = 30.0
@@ -189,3 +184,15 @@ offset_right = 885.0
 offset_bottom = -444.0
 text = "Time: 30
 "
+
+[node name="Button" type="Button" parent="." unique_id=316298431]
+offset_left = 879.0
+offset_top = -4450.0
+offset_right = 926.0
+offset_bottom = -4419.0
+text = "PLAY"
+
+[node name="Screenshot20261114184933" type="Sprite2D" parent="." unique_id=550411796]
+position = Vector2(918, -4473)
+scale = Vector2(0.46819344, 0.36702126)
+texture = ExtResource("4_0hol4")
