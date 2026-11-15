@@ -2,8 +2,25 @@
   display: grid;
   min-height: 100svh;
   place-items: center;
+  background: url('./assets/night-forest.jpg') center / cover no-repeat;
 }
 
 .stary {
   image-rendering: pixelated;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .stary {
+    animation: stary-fall 1.2s ease-in-out;
+  }
+}
+
+@keyframes stary-fall {
+  from {
+    transform: translateY(calc(-50svh - 50%)) rotate(-1turn);
+  }
+
+  to {
+    transform: translateY(0) rotate(0);
+  }
 }
