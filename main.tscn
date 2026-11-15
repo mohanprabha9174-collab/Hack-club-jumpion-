@@ -1,25 +1,610 @@
 [gd_scene format=3 uid="uid://cb0g5xmou3yir"]
 
-[ext_resource type="Texture2D" uid="uid://kxirhaugllpn" path="res://icon.svg" id="1_h2yge"]
 [ext_resource type="Texture2D" uid="uid://cx0ia7wud5ibr" path="res://star charcter.png" id="2_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://omqh11mm11q7" path="res://Trampoline.png" id="3_lquwl"]
+[ext_resource type="Script" uid="uid://b7vkul1hw5ksn" path="res://trampoline.gd" id="4_1bvp3"]
+[ext_resource type="Script" path="res://main.gd" id="1_main"]
 
-[node name="Main" type="Node2D" unique_id=925031726]
+[sub_resource type="Animation" id="Animation_RESET"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Jumpion:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(585, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Jumpion:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Jumpion/Art:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Trampoline:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(718, 12)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Trampoline:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Trampoline:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Trampoline:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=214007647]
-scale = Vector2(100, 100)
+[sub_resource type="Animation" id="Animation_fall_to_earth"]
+resource_name = "fall_to_earth"
+length = 1.54
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Jumpion:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.65, 0.85, 1.1, 1.54),
+"transitions": PackedFloat32Array(2.3, 0.45, 1.8, 0.65, 1),
+"update": 0,
+"values": [Vector2(570, -260), Vector2(585, 95), Vector2(585, 42), Vector2(585, 56), Vector2(585, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Jumpion:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.29, 0.61, 0.67),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-18.0, -12.0, 5.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Jumpion/Art:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.58, 0.65, 0.8, 1.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.94, 1.12), Vector2(0.94, 1.13), Vector2(1.26, 0.68), Vector2(0.91, 1.1), Vector2(1, 1)]
+}
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=433874199]
-texture = ExtResource("1_h2yge")
+[sub_resource type="Animation" id="Animation_toss_and_land"]
+resource_name = "toss_and_land"
+length = 0.96
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Jumpion:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14, 0.32, 0.55, 0.85, 0.96),
+"transitions": PackedFloat32Array(1, 0.75, 0.7, 1.8, 1, 1),
+"update": 0,
+"values": [Vector2(585, 0), Vector2(575, 5), Vector2(599, -17), Vector2(662, -67), Vector2(718, 10), Vector2(718, 25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Jumpion:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14, 0.34, 0.66, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -15.0, 16.0, 8.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Jumpion/Art:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.14, 0.35, 0.78, 0.96),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.14, 0.86), Vector2(0.94, 1.08), Vector2(1, 1), Vector2(1.23, 0.74)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Trampoline:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.16),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Trampoline:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.16, 0.32, 0.56, 0.64, 0.73, 0.85, 0.96),
+"transitions": PackedFloat32Array(1, 0.7, 1.8, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(613, -28), Vector2(613, -28), Vector2(675, -88), Vector2(718, 12), Vector2(718, 9), Vector2(718, 12), Vector2(718, 12), Vector2(718, 27)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Trampoline:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.16, 0.36, 0.56),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-24.0, -24.0, 13.0, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Trampoline:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.16, 0.5, 0.85, 0.96),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.33, 0.33), Vector2(0.33, 0.33), Vector2(1, 1), Vector2(1, 1), Vector2(1.2, 0.78)]
+}
 
-[node name="StarCharcter2" type="Sprite2D" parent="." unique_id=1903608698]
+[sub_resource type="Animation" id="Animation_trampoline_release"]
+resource_name = "trampoline_release"
+length = 0.52
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Jumpion/Art:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.31, 0.52),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.23, 0.74), Vector2(0.85, 1.2), Vector2(0.96, 1.07), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Trampoline:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.23, 0.44),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(718, 27), Vector2(718, 8), Vector2(718, 15), Vector2(718, 12)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Trampoline:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.23, 0.44),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.2, 0.78), Vector2(0.96, 1.06), Vector2(1.04, 0.96), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lose_balance"]
+resource_name = "lose_balance"
+length = 0.27
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Jumpion:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.11, 0.27),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(585, 0), Vector2(585, -11), Vector2(585, 28)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Jumpion:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.11, 0.27),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -14.0, 24.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Jumpion/Art:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.27),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.12, 0.91), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_motion"]
+_data = {
+&"RESET": SubResource("Animation_RESET"),
+&"fall_to_earth": SubResource("Animation_fall_to_earth"),
+&"toss_and_land": SubResource("Animation_toss_and_land"),
+&"trampoline_release": SubResource("Animation_trampoline_release"),
+&"lose_balance": SubResource("Animation_lose_balance")
+}
+
+[sub_resource type="Animation" id="Animation_float"]
+resource_name = "float"
+length = 1.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Art:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.8),
+"transitions": PackedFloat32Array(-1.5, -1.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_float"]
+_data = {
+&"float": SubResource("Animation_float")
+}
+
+[node name="Main" type="Node2D"]
 texture_filter = 1
-position = Vector2(-10907.001, -43884)
-scale = Vector2(588, 559.99994)
-texture = ExtResource("2_1bvp3")
+script = ExtResource("1_main")
 
-[node name="Trampoline" type="Sprite2D" parent="." unique_id=337706850]
-texture_filter = 1
-position = Vector2(-11833, -32981.004)
-scale = Vector2(238.90433, 171.53123)
+[node name="World" type="Node2D" parent="."]
+z_index = -2
+
+[node name="Earth" type="Polygon2D" parent="World"]
+color = Color(0.068, 0.125, 0.166, 1)
+polygon = PackedVector2Array(0, 95, 960, 95, 960, 700, 0, 700)
+
+[node name="Horizon" type="Line2D" parent="World"]
+points = PackedVector2Array(0, 95, 960, 95)
+width = 2.0
+default_color = Color(0.20, 0.38, 0.43, 1)
+
+[node name="Mark0" type="Line2D" parent="World"]
+points = PackedVector2Array(488, 0, 885, 0)
+width = 1.0
+default_color = Color(0.28, 0.37, 0.55, 0.46)
+
+[node name="Level0" type="Label" parent="World"]
+offset_left = 894.0
+offset_top = -11.0
+offset_right = 952.0
+offset_bottom = 13.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+text = "0 m"
+
+[node name="Mark60" type="Line2D" parent="World"]
+points = PackedVector2Array(488, -360, 885, -360)
+width = 1.0
+default_color = Color(0.28, 0.37, 0.55, 0.46)
+
+[node name="Level60" type="Label" parent="World"]
+offset_left = 894.0
+offset_top = -371.0
+offset_right = 952.0
+offset_bottom = -347.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+text = "60 m"
+
+[node name="Mark120" type="Line2D" parent="World"]
+points = PackedVector2Array(488, -720, 885, -720)
+width = 1.0
+default_color = Color(0.28, 0.37, 0.55, 0.46)
+
+[node name="Level120" type="Label" parent="World"]
+offset_left = 894.0
+offset_top = -731.0
+offset_right = 952.0
+offset_bottom = -707.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+text = "120 m"
+
+[node name="Mark180" type="Line2D" parent="World"]
+points = PackedVector2Array(435, -1080, 885, -1080)
+width = 1.0
+default_color = Color(0.55, 0.44, 0.23, 0.75)
+
+[node name="Level180" type="Label" parent="World"]
+offset_left = 894.0
+offset_top = -1091.0
+offset_right = 952.0
+offset_bottom = -1067.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+text = "180 m"
+
+[node name="GoalLine" type="Label" parent="World"]
+offset_left = 754.0
+offset_top = -1110.0
+offset_right = 884.0
+offset_bottom = -1084.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 15
+text = "HOME"
+horizontal_alignment = 2
+
+[node name="Mark240" type="Line2D" parent="World"]
+points = PackedVector2Array(488, -1440, 885, -1440)
+width = 1.0
+default_color = Color(0.28, 0.37, 0.55, 0.46)
+
+[node name="Level240" type="Label" parent="World"]
+offset_left = 894.0
+offset_top = -1451.0
+offset_right = 952.0
+offset_bottom = -1427.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+text = "240 m"
+
+[node name="Mark300" type="Line2D" parent="World"]
+points = PackedVector2Array(488, -1800, 885, -1800)
+width = 1.0
+default_color = Color(0.28, 0.37, 0.55, 0.46)
+
+[node name="Level300" type="Label" parent="World"]
+offset_left = 894.0
+offset_top = -1811.0
+offset_right = 952.0
+offset_bottom = -1787.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+text = "300 m"
+
+[node name="Mark360" type="Line2D" parent="World"]
+points = PackedVector2Array(488, -2160, 885, -2160)
+width = 1.0
+default_color = Color(0.28, 0.37, 0.55, 0.46)
+
+[node name="Level360" type="Label" parent="World"]
+offset_left = 894.0
+offset_top = -2171.0
+offset_right = 952.0
+offset_bottom = -2147.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+text = "360 m"
+
+[node name="Mark420" type="Line2D" parent="World"]
+points = PackedVector2Array(488, -2520, 885, -2520)
+width = 1.0
+default_color = Color(0.28, 0.37, 0.55, 0.46)
+
+[node name="Level420" type="Label" parent="World"]
+offset_left = 894.0
+offset_top = -2531.0
+offset_right = 952.0
+offset_bottom = -2507.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+text = "420 m"
+
+[node name="Stage" type="Node2D" parent="."]
+script = ExtResource("4_1bvp3")
+
+[node name="Trampoline" type="Node2D" parent="Stage"]
+visible = false
+position = Vector2(718, 12)
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage/Trampoline"]
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_lquwl")
+offset = Vector2(0, 24)
+
+[node name="Jumpion" type="Node2D" parent="Stage"]
+position = Vector2(570, -260)
+
+[node name="Art" type="Node2D" parent="Stage/Jumpion"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage/Jumpion/Art"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_1bvp3")
+offset = Vector2(2.5, -9)
+
+[node name="FloatAnimation" type="AnimationPlayer" parent="Stage/Jumpion"]
+libraries/ = SubResource("AnimationLibrary_float")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Stage"]
+libraries/ = SubResource("AnimationLibrary_motion")
+
+[node name="Camera2D" type="Camera2D" parent="Stage"]
+position = Vector2(480, -36)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Title" type="Label" parent="HUD"]
+offset_left = 38.0
+offset_top = 27.0
+offset_right = 388.0
+offset_bottom = 71.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 38
+text = "Jumpion"
+
+[node name="Height" type="Label" parent="HUD"]
+offset_left = 753.0
+offset_top = 29.0
+offset_right = 921.0
+offset_bottom = 78.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 36
+text = "0 m"
+horizontal_alignment = 2
+
+[node name="Goal" type="Label" parent="HUD"]
+offset_left = 753.0
+offset_top = 78.0
+offset_right = 921.0
+offset_bottom = 107.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 14
+text = "Goal: 180 m"
+horizontal_alignment = 2
+
+[node name="Panel" type="Panel" parent="HUD"]
+offset_left = 38.0
+offset_top = 151.0
+offset_right = 413.0
+offset_bottom = 509.0
+
+[node name="Round" type="Label" parent="HUD/Panel"]
+offset_left = 22.0
+offset_top = 20.0
+offset_right = 353.0
+offset_bottom = 45.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 14
+text = "Question 1 / 7"
+
+[node name="Question" type="Label" parent="HUD/Panel"]
+offset_left = 22.0
+offset_top = 54.0
+offset_right = 353.0
+offset_bottom = 129.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 23
+text = "Name something that bounces back."
+autowrap_mode = 2
+
+[node name="Answer" type="LineEdit" parent="HUD/Panel"]
+offset_left = 22.0
+offset_top = 147.0
+offset_right = 353.0
+offset_bottom = 193.0
+editable = false
+max_length = 80
+placeholder_text = "Type your answer"
+theme_override_font_sizes/font_size = 17
+
+[node name="Submit" type="Button" parent="HUD/Panel"]
+offset_left = 22.0
+offset_top = 205.0
+offset_right = 134.0
+offset_bottom = 246.0
+disabled = true
+text = "Submit"
+theme_override_font_sizes/font_size = 16
+
+[node name="Skip" type="Button" parent="HUD/Panel"]
+offset_left = 145.0
+offset_top = 205.0
+offset_right = 224.0
+offset_bottom = 246.0
+disabled = true
+text = "Skip"
+theme_override_font_sizes/font_size = 16
+
+[node name="Feedback" type="Label" parent="HUD/Panel"]
+offset_left = 22.0
+offset_top = 254.0
+offset_right = 353.0
+offset_bottom = 296.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 15
+text = ""
+autowrap_mode = 2
+
+[node name="Next" type="Button" parent="HUD/Panel"]
+offset_left = 22.0
+offset_top = 305.0
+offset_right = 193.0
+offset_bottom = 341.0
+visible = false
+text = "Next question"
+theme_override_font_sizes/font_size = 16
+
+[connection signal="text_submitted" from="HUD/Panel/Answer" to="." method="submit_answer"]
+[connection signal="pressed" from="HUD/Panel/Submit" to="." method="submit_answer"]
+[connection signal="pressed" from="HUD/Panel/Skip" to="." method="skip_question"]
+[connection signal="pressed" from="HUD/Panel/Next" to="." method="next_round"]
