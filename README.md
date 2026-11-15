@@ -2,29 +2,19 @@
 
 Help a fallen star get back home. Answer seven questions and finish at 180 m or higher.
 
-## Play in Godot
+## Play
 
 1. Open Godot 4.6 and click **Import**.
-2. Choose `project.godot` in this folder and press **F5**.
-3. Watch Jumpion fall from the home star. Then type a guess and press **Enter**. Any of the three obvious guesses for a question costs 20 m, and your height bottoms out at zero. A less common answer gives you 10 m. Uncommon, rare and secret answers spawn a trampoline and give you 30, 60 or 100 m.
-4. If your guess is missing from the list, try another or press **Skip**. Use **Next question** to move on. After the last question you can see your result and play again.
+2. Pick `project.godot` and press **F5**.
+3. Type a guess and press **Enter**. The three most obvious guesses cost 20 m. A less common guess adds 10 m. Rarer guesses give you a trampoline jump worth 30, 60 or 100 m.
+4. Try another guess or click **Skip** if the game doesn't know your answer.
 
-## Edit the game
+## Edit
 
-| File | What to change |
-| --- | --- |
-| `answers.json` | The seven questions and their answer lists. Use a pipe to list alternatives for the same answer, like `couch\|sofa`. The lists set the scores. |
-| `main.gd` | The rules, scoring, questions, speech bubble dialogue and ending. |
-| `trampoline.gd` | Starts the animations and moves the star and camera the right number of meters. |
-| `main.tscn` | The layout and keyframes. In Godot, select **Stage → AnimationPlayer** to preview the fall, toss, release and stumble. Select **Stage → Jumpion → FloatAnimation** for the idle animation. |
+Change the questions and guesses in `answers.json`. Write answers like `couch|sofa` when both spellings or words should count.
 
-## Drawings
+`main.gd` handles the questions, score and dialogue. `movement.gd` moves Jumpion and the camera. Open `main.tscn` to edit the screen and animations.
 
-The game uses the existing star and trampoline PNGs. Both are 64 × 64 pixels. Godot animates their position, rotation and scale, so one image per object works.
+The star and trampoline use 64 × 64 PNGs. Open `star.kra` in Krita to edit the star. The scrolling level is in `map.webp`.
 
-- **Star** — If you want a new version, export a transparent 64 × 64 PNG as `star charcter.png`. The current star can be edited in `Star Charcter.kra` with Krita.
-- **Trampoline** — If you redraw it, export a transparent 64 × 64 PNG as `Trampoline.png`.
-- **Map** — `level-map.webp` uses the existing `finalmapmaybe.png` from the GitHub main branch. The playable copy trims the transparent margin and scales the artwork down. In Godot, select **World → LevelMap** to move or replace it.
-- **Starfield** — `starfield.png` is adapted from Kenney's [Space Shooter Redux](https://lpc.opengameart.org/content/space-shooter-redux) (CC0). The original tile was recolored for Jumpion.
-
-To keep the existing animations lined up, open each original sprite as a layer and draw your replacement in the same spot on the canvas.
+Starfield art adapted from Kenney's [Space Shooter Redux](https://lpc.opengameart.org/content/space-shooter-redux) (CC0).

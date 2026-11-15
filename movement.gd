@@ -1,10 +1,11 @@
 extends Node2D
 
 const PIXELS_PER_METER = 6
-const HOME_X = 585.0
+const REST_X = 585.0
 const CAMERA_OFFSET = -36.0
 
 @onready var star: Node2D = $Jumpion
+@onready var art: Node2D = $Jumpion/Art
 @onready var pad: Node2D = $Trampoline
 @onready var camera: Camera2D = $Camera2D
 @onready var motion: AnimationPlayer = $AnimationPlayer
@@ -39,13 +40,13 @@ func climb(meters: int, use_trampoline: bool) -> void:
 	var launch = create_tween().set_parallel(true)
 	launch.tween_property(star, "position:y", -rise, airtime).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	if use_trampoline:
-		launch.tween_property(star, "position:x", HOME_X, airtime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		launch.tween_property(star, "position:x", REST_X, airtime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		launch.tween_property(star, "rotation_degrees", 360.0, airtime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	# Let Jumpion get ahead of the camera before it catches up.
 	launch.tween_property(camera, "position:y", CAMERA_OFFSET - rise, airtime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await launch.finished
 
-	move_stage(-rise)
+	settle_at_height(-rise)
 
 
 func fall(meters: int) -> void:
@@ -60,17 +61,17 @@ func fall(meters: int) -> void:
 	tumble.tween_property(camera, "position:y", CAMERA_OFFSET + drop, 0.45).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	await tumble.finished
 
-	move_stage(drop)
+	settle_at_height(drop)
 
 
 func stop_float() -> void:
 	float_anim.stop()
-	star.get_node("Art").position.y = 0
+	art.position.y = 0
 
 
-func move_stage(y_change: float) -> void:
+func settle_at_height(y_change: float) -> void:
 	position.y += y_change
-	star.position = Vector2(HOME_X, 0)
+	star.position = Vector2(REST_X, 0)
 	star.rotation_degrees = 0.0
 	camera.position.y = CAMERA_OFFSET
 	pad.hide()

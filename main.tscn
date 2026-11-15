@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://cb0g5xmou3yir"]
 
-[ext_resource type="Texture2D" uid="uid://cx0ia7wud5ibr" path="res://star charcter.png" id="2_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://omqh11mm11q7" path="res://Trampoline.png" id="3_lquwl"]
-[ext_resource type="Script" uid="uid://b7vkul1hw5ksn" path="res://trampoline.gd" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://cx0ia7wud5ibr" path="res://star.png" id="2_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://omqh11mm11q7" path="res://trampoline.png" id="3_lquwl"]
+[ext_resource type="Script" uid="uid://b7vkul1hw5ksn" path="res://movement.gd" id="4_1bvp3"]
 [ext_resource type="Script" path="res://main.gd" id="1_main"]
-[ext_resource type="Texture2D" path="res://level-map.webp" id="5_map"]
+[ext_resource type="Texture2D" path="res://map.webp" id="5_map"]
 [ext_resource type="Texture2D" path="res://starfield.png" id="6_stars"]
 
 [sub_resource type="Animation" id="Animation_RESET"]
