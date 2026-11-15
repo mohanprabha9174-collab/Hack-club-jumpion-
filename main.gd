@@ -5,6 +5,7 @@ const STAR_HEIGHT = 180
 const TIERS = ["top", "common", "uncommon", "rare", "secret"]
 const METERS = [-20, 10, 30, 60, 100]
 const LABELS = ["Top 3 answer", "Less common", "Uncommon", "Rare", "Secret answer!"]
+const FIRST_BOUNCE_TIER = 2
 
 @onready var stage = $Stage
 @onready var hud: CanvasLayer = $HUD
@@ -28,6 +29,7 @@ func _ready() -> void:
 	show_question()
 	await stage.intro()
 	hud.show()
+	stage.say("How do I get back up?")
 	unlock_answer()
 
 
@@ -64,6 +66,7 @@ func submit_answer(_typed_text: String = "") -> void:
 		return
 
 	lock_answer()
+	stage.say("")
 	var new_height = maxi(0, meters + METERS[tier])
 	var change = new_height - meters
 	if change == 0:
@@ -72,9 +75,12 @@ func submit_answer(_typed_text: String = "") -> void:
 		feedback.text = "%s · %+d m" % [LABELS[tier], change]
 
 	if change > 0:
-		await stage.bounce(change)
+		var use_trampoline = tier >= FIRST_BOUNCE_TIER
+		await stage.climb(change, use_trampoline)
+		stage.say("That worked!" if use_trampoline else "A little higher.")
 	else:
 		await stage.fall(change)
+		stage.say("Oops. Let's try again.")
 
 	meters = new_height
 	height.text = "%d m" % meters
@@ -123,9 +129,11 @@ func next_round() -> void:
 	if meters >= STAR_HEIGHT:
 		question.text = "You made it back to the stars!"
 		feedback.text = "Final height: %d m. You reached the %d m goal!" % [meters, STAR_HEIGHT]
+		stage.say("I made it!")
 	else:
 		question.text = "Jumpion is still on the way home."
 		feedback.text = "Final height: %d m. You needed %d m more." % [meters, STAR_HEIGHT - meters]
+		stage.say("I'll try again.")
 	answer_box.hide()
 	submit.hide()
 	skip.hide()

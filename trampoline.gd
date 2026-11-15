@@ -9,6 +9,8 @@ const CAMERA_OFFSET = -36.0
 @onready var camera: Camera2D = $Camera2D
 @onready var motion: AnimationPlayer = $AnimationPlayer
 @onready var float_anim: AnimationPlayer = $Jumpion/FloatAnimation
+@onready var bubble: Panel = $SpeechBubble
+@onready var speech: Label = $SpeechBubble/Text
 
 
 func intro() -> void:
@@ -20,18 +22,25 @@ func intro() -> void:
 	float_anim.play("float")
 
 
-func bounce(meters: int) -> void:
+func say(line: String) -> void:
+	speech.text = line
+	bubble.visible = not line.is_empty()
+
+
+func climb(meters: int, use_trampoline: bool) -> void:
 	stop_float()
-	motion.play("toss_and_land")
-	await motion.animation_finished
-	motion.play("trampoline_release")
+	if use_trampoline:
+		motion.play("toss_and_land")
+		await motion.animation_finished
+		motion.play("trampoline_release")
 
 	var rise = meters * PIXELS_PER_METER
 	var airtime = clampf(0.60 + meters * 0.010, 0.68, 1.60)
 	var launch = create_tween().set_parallel(true)
 	launch.tween_property(star, "position:y", -rise, airtime).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	launch.tween_property(star, "position:x", HOME_X, airtime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	launch.tween_property(star, "rotation_degrees", 360.0, airtime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	if use_trampoline:
+		launch.tween_property(star, "position:x", HOME_X, airtime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		launch.tween_property(star, "rotation_degrees", 360.0, airtime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	# Let Jumpion get ahead of the camera before it catches up.
 	launch.tween_property(camera, "position:y", CAMERA_OFFSET - rise, airtime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await launch.finished
@@ -64,6 +73,6 @@ func move_stage(y_change: float) -> void:
 	star.position = Vector2(HOME_X, 0)
 	star.rotation_degrees = 0.0
 	camera.position.y = CAMERA_OFFSET
-	pad.visible = is_zero_approx(position.y)
+	pad.hide()
 	camera.force_update_scroll()
 	float_anim.play("float")
