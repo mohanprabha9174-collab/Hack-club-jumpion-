@@ -23,10 +23,14 @@ export function useStaryControls() {
   const introFinished = useRef(false)
   const [question, setQuestion] = useState(null)
   const [result, setResult] = useState(null)
+  const [won, setWon] = useState(false)
 
   // https://react.dev/reference/react/useEffect#connecting-to-an-external-system
   useEffect(() => {
     const stage = stageRef.current
+    const world = stage.querySelector('.game-world')
+    const pad = stage.querySelector('.launch-pad')
+    const cloud = stage.querySelector('.finish-cloud')
     const stary = stage.querySelector('.stary')
     const ground = stage.querySelector('.ground')
     const platforms = [...stage.querySelectorAll('.platform')].reverse()
@@ -36,6 +40,8 @@ export function useStaryControls() {
     const heldDirections = new Set()
     const visitedPlatforms = new Set()
     let moveTimer = null
+    let gameWon = false
+    let touchingPad = false
     let airFrame = null
     let doubleJumpUnlocked = false
     let airJumpAvailable = true
@@ -45,18 +51,51 @@ export function useStaryControls() {
     let height = 0
 
     function canMove() {
-      return pendingQuestion === null && (introFinished.current || reducedMotion.matches)
+      return !gameWon && pendingQuestion === null && (introFinished.current || reducedMotion.matches)
     }
 
     function setHeight(nextHeight) {
       height = nextHeight
+      const cameraMax = world.offsetHeight - stage.clientHeight
+      const cameraY = Math.max(0, Math.min(cameraMax, height - stage.clientHeight * 0.35))
       stage.style.setProperty('--stary-y', `${-height}px`)
+      stage.style.setProperty('--camera-y', `${cameraY}px`)
     }
 
     function isOverPlatform(platform) {
       const star = stary.getBoundingClientRect()
       const block = platform.getBoundingClientRect()
       return star.right > block.left && star.left < block.right
+    }
+
+    function tryLaunchFromPad() {
+      const star = stary.getBoundingClientRect()
+      const padBounds = pad.getBoundingClientRect()
+      const overlaps = star.right > padBounds.left && star.left < padBounds.right &&
+        star.bottom > padBounds.top && star.top < padBounds.bottom
+      const newlyTouched = overlaps && !touchingPad
+      touchingPad = overlaps
+      if (!newlyTouched) return false
+
+      airJumpAvailable = true
+      startAirMovement(JUMP_SPEED * 1.45)
+      return true
+    }
+
+    function tryReachCloud(highestHeight, lowestHeight = highestHeight) {
+      if (!isOverPlatform(cloud)) return false
+      const groundTop = ground.getBoundingClientRect().top
+      const cloudBounds = cloud.getBoundingClientRect()
+      const touchHeight = groundTop - cloudBounds.bottom - stary.offsetHeight
+      if (highestHeight <= touchHeight || groundTop - lowestHeight <= cloudBounds.top) return false
+
+      gameWon = true
+      if (airFrame !== null) window.cancelAnimationFrame(airFrame)
+      airFrame = null
+      stopMoving()
+      setHeight(Math.max(lowestHeight, touchHeight + 1))
+      setWon(true)
+      return true
     }
 
     function findLanding(startHeight, launchSpeed, previousSeconds, seconds) {
@@ -73,11 +112,13 @@ export function useStaryControls() {
     }
 
     function askQuestion(platform) {
-      if (visitedPlatforms.has(platform)) return
+      const questionIndex = platform.dataset.question
+      if (questionIndex === undefined || visitedPlatforms.has(platform)) return
       visitedPlatforms.add(platform)
       stopMoving()
 
       const nextQuestion = {
+        index: Number(questionIndex),
         deadline: Date.now() + QUESTION_TIME_MS,
         finish(outcome) {
           if (pendingQuestion !== nextQuestion) return
@@ -104,6 +145,8 @@ export function useStaryControls() {
       if (airFrame !== null) window.cancelAnimationFrame(airFrame)
       standingPlatform = null
       const startHeight = height
+      const apexTime = launchSpeed / GRAVITY
+      const apexHeight = startHeight + launchSpeed * apexTime / 2
       let startTime = null
       let previousSeconds = -1
 
@@ -113,6 +156,11 @@ export function useStaryControls() {
         startTime ??= time
         const seconds = (time - startTime) / 1000
         const nextHeight = startHeight + launchSpeed * seconds - GRAVITY * seconds ** 2 / 2
+        const highestHeight = previousSeconds < apexTime && seconds >= apexTime
+          ? apexHeight
+          : Math.max(height, nextHeight)
+        if (tryReachCloud(highestHeight, Math.min(height, nextHeight))) return
+
         const landing = findLanding(startHeight, launchSpeed, previousSeconds, seconds)
         previousSeconds = seconds
 
@@ -121,11 +169,12 @@ export function useStaryControls() {
           airFrame = null
           airJumpAvailable = true
           standingPlatform = landing.platform
-          askQuestion(landing.platform)
+          if (!tryLaunchFromPad()) askQuestion(landing.platform)
           return
         }
 
         setHeight(Math.max(0, nextHeight))
+        if (tryLaunchFromPad()) return
         if (seconds > 0 && height === 0) {
           airFrame = null
           airJumpAvailable = true
@@ -143,7 +192,8 @@ export function useStaryControls() {
       xOffset = Math.max(-edge, Math.min(edge, xOffset + distance))
       stage.style.setProperty('--stary-x', `${xOffset}px`)
 
-      if (canMove() && standingPlatform && !isOverPlatform(standingPlatform)) startAirMovement(0)
+      if (!canMove() || tryReachCloud(height) || tryLaunchFromPad()) return
+      if (standingPlatform && !isOverPlatform(standingPlatform)) startAirMovement(0)
     }
 
     function moveHeldDirection() {
@@ -165,7 +215,7 @@ export function useStaryControls() {
     // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key#keyboardevent_sequence
     function handleKeyDown(event) {
       const { key } = event
-      if (pendingQuestion) return
+      if (pendingQuestion || gameWon) return
       if (key !== 'ArrowLeft' && key !== 'ArrowRight' && key !== 'ArrowUp') return
       if (event.altKey || event.ctrlKey || event.metaKey) return
 
@@ -194,9 +244,8 @@ export function useStaryControls() {
     }
 
     function handleResize() {
-      if (standingPlatform) {
-        setHeight(ground.getBoundingClientRect().top - standingPlatform.getBoundingClientRect().top)
-      }
+      const groundTop = ground.getBoundingClientRect().top
+      setHeight(standingPlatform ? groundTop - standingPlatform.getBoundingClientRect().top : height)
       moveStary(0)
     }
 
@@ -214,6 +263,7 @@ export function useStaryControls() {
       if (airFrame !== null) window.cancelAnimationFrame(airFrame)
       stage.style.removeProperty('--stary-x')
       stage.style.removeProperty('--stary-y')
+      stage.style.removeProperty('--camera-y')
     }
   }, [])
 
@@ -221,5 +271,5 @@ export function useStaryControls() {
     introFinished.current = true
   }
 
-  return { stageRef, finishIntro, question, result }
+  return { stageRef, finishIntro, question, result, won }
 }

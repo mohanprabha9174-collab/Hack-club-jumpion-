@@ -5,16 +5,29 @@
   --ground-height: 64px;
   --wall-width: 16px;
   --boundary-color: #6b6b6b;
+  --camera-y: 0px;
+  --platform-gap: min(120px, 12.5svh);
+  --cloud-elevation: calc(8px + var(--platform-count) * var(--platform-gap) + 270px);
   position: relative;
+  height: 100svh;
+  overflow: hidden;
+  background: url('./assets/night-forest.jpg') center / cover no-repeat;
+}
+
+.game-world {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: max(100%, calc(var(--ground-height) + var(--cloud-elevation) + 180px));
   display: grid;
-  min-height: 100svh;
   grid-template-rows: 1fr var(--ground-height);
   justify-items: center;
-  background: url('./assets/night-forest.jpg') center / cover no-repeat;
+  translate: 0 var(--camera-y);
 }
 
 .title {
   position: absolute;
+  z-index: 1;
   top: 16px;
   left: 16px;
   right: 16px;
@@ -66,7 +79,7 @@
   --platform-thickness: 16px;
   position: absolute;
   left: var(--platform-x);
-  bottom: calc(var(--ground-height) + 8px + var(--platform-level) * min(120px, 12.5svh) - var(--platform-thickness));
+  bottom: calc(var(--ground-height) + 8px + var(--platform-level) * var(--platform-gap) - var(--platform-thickness));
   width: min(112px, calc(10% - var(--wall-width) / 2));
   height: var(--platform-thickness);
 }
@@ -159,4 +172,37 @@
   color: black;
   text-align: center;
   font: 700 1rem system-ui, sans-serif;
+}
+
+.launch-pad {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  width: 24px;
+  height: 24px;
+  translate: -50% 0;
+  background: #ff8a24;
+}
+
+.finish-cloud {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--ground-height) + var(--cloud-elevation));
+  width: clamp(76px, 22vw, 180px);
+  aspect-ratio: 20 / 13;
+  overflow: hidden;
+  translate: -50% 0;
+  clip-path: polygon(0% 45%, 35% 0%, 65% 0%, 100% 45%, 100% 78%, 86% 100%, 14% 100%, 0% 78%);
+}
+
+.finish-cloud img {
+  position: absolute;
+  left: -40%;
+  top: -89%;
+  width: 180%;
+  image-rendering: pixelated;
+}
+
+.win-box {
+  text-align: center;
 }

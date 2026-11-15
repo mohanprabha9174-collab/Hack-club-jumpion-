@@ -14,7 +14,7 @@ function normalize(answer) {
     .trim()
 }
 
-export function scoreAnswer(question, answer) {
+function scoreAnswer(question, answer) {
   const normalized = normalize(answer)
   if (!normalized) return null
   if (question.rare.some(pick => normalize(pick) === normalized)) return 'rare'
