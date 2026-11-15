@@ -131,9 +131,19 @@ export const krillionQuestions = [
   },
   // Dive 88, prompt 2
   {
-    prompt: "Name a type of table (the furniture)",
+    prompt: "Name a piece of furniture",
     rare: ["Eight Immortals table"],
     common: [
+      "Chair",
+      "Sofa",
+      "Couch",
+      "Bed",
+      "Bookshelf",
+      "Wardrobe",
+      "Dresser",
+      "Cabinet",
+      "Stool",
+      "Armchair",
       "Aalto table",
       "Acrylic table",
       "Adirondack table",

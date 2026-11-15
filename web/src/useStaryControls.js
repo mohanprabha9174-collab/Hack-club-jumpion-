@@ -23,7 +23,9 @@ export function useStaryControls() {
   const introFinished = useRef(false)
   const [question, setQuestion] = useState(null)
   const [result, setResult] = useState(null)
+  const resultTimer = useRef(null)
   const [won, setWon] = useState(false)
+  const [doubleJumpVisible, setDoubleJumpVisible] = useState(false)
 
   // https://react.dev/reference/react/useEffect#connecting-to-an-external-system
   useEffect(() => {
@@ -44,6 +46,7 @@ export function useStaryControls() {
     let touchingPad = false
     let airFrame = null
     let doubleJumpUnlocked = false
+    let doubleJumpTimer = null
     let airJumpAvailable = true
     let standingPlatform = null
     let pendingQuestion = null
@@ -125,9 +128,18 @@ export function useStaryControls() {
           pendingQuestion = null
           setQuestion(null)
           setResult(outcome)
+          window.clearTimeout(resultTimer.current)
+          resultTimer.current = window.setTimeout(() => setResult(null), 1200)
 
           if (outcome === 'common') {
             doubleJumpUnlocked = true
+            setDoubleJumpVisible(true)
+            window.clearTimeout(doubleJumpTimer)
+      window.clearTimeout(resultTimer.current)
+            doubleJumpTimer = window.setTimeout(() => {
+              doubleJumpUnlocked = false
+              setDoubleJumpVisible(false)
+            }, 5000)
             startAirMovement(JUMP_SPEED / 2)
           } else if (outcome === 'rare') {
             startAirMovement(JUMP_SPEED * 1.5)
@@ -271,5 +283,5 @@ export function useStaryControls() {
     introFinished.current = true
   }
 
-  return { stageRef, finishIntro, question, result, won }
+  return { stageRef, finishIntro, question, result, won, doubleJumpVisible }
 }

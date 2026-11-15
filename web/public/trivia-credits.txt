@@ -1,0 +1,8 @@
+Jumpion trivia credits
+
+Adapted from the Krillion Daily Dive Dataset by KrillionHQ.
+Source: https://github.com/StruggleYang/krillion-dataset
+License: Creative Commons Attribution 4.0 International
+https://creativecommons.org/licenses/by/4.0/
+
+Jumpion uses seven prompts and sampled answers. Lower rarity tiers are combined into Common; the highest tier is called One in a Jumpion.

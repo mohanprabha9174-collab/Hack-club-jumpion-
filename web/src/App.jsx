@@ -1,7 +1,10 @@
 import bubbleImg from './assets/text-bubble.png'
 import cloudImg from './assets/finish-cloud.jpg'
+import princessPeachesImg from './assets/princess peaches.jpg'
 import titleImg from './assets/jumpion-title.png'
 import staryImg from './assets/stary.png'
+import ohnoSound from './assets/ohnosound.mp3'
+import doubleJumpIcon from './assets/double-jump.png'
 import { useStaryControls } from './useStaryControls.js'
 import { Question } from './Question.jsx'
 import './App.css'
@@ -10,13 +13,18 @@ const STARY_SIZE = 168
 const LAUNCH_PLATFORM = 5
 const PLATFORM_POSITIONS = [65, 54, 43, 32, 43, 54, 65, 54, 43, 32, 43, 54, 65, 54, 43, 32, 43, 54, 65, 54, 50]
 const RESULT_LABELS = {
-  common: 'Common · Double jump unlocked',
+  common: 'Common',
   rare: 'One in a Jumpion!',
   timeout: 'Time’s up',
 }
 
 function App() {
-  const { stageRef, finishIntro, question, result, won } = useStaryControls()
+  const { stageRef, finishIntro, question, result, won, doubleJumpVisible } = useStaryControls()
+
+  function playFallSound() {
+    const sound = new Audio(ohnoSound)
+    sound.play().catch(() => {})
+  }
 
   return (
     <main className="stage" ref={stageRef} style={{ '--platform-count': PLATFORM_POSITIONS.length }}>
@@ -42,17 +50,20 @@ function App() {
         <div className="finish-cloud">
           <img src={cloudImg} alt="Home cloud" />
         </div>
+        <img src={princessPeachesImg} className="princess-peaches" alt="Princess Peach" />
         <img
           src={staryImg}
           className="stary"
           width={STARY_SIZE}
           height={STARY_SIZE}
           alt="Stary"
+          onAnimationStart={playFallSound}
           onAnimationEnd={finishIntro}
         />
         <img src={bubbleImg} className="text-bubble" width="674" height="370" alt="" />
         <div className="ground" aria-hidden="true" />
       </div>
+      {doubleJumpVisible && <img className="double-jump-icon" src={doubleJumpIcon} alt="Double jump available" />}
       <h1 className="title">
         <img src={titleImg} width="249" height="66" alt="Jumpion" />
       </h1>
@@ -62,7 +73,6 @@ function App() {
         <div className="question-overlay">
           <section className="question-box win-box" role="status">
             <h2>You win!</h2>
-            <p>Stary made it home.</p>
           </section>
         </div>
       )}

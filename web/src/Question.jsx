@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { krillionQuestions } from './krillionQuestions.js'
+import correctSound from './assets/correct.mp3'
 
 function secondsRemaining(deadline) {
   return Math.max(0, Math.ceil((deadline - Date.now()) / 1000))
@@ -49,7 +50,7 @@ export function Question({ questionIndex = 0, deadline, onFinish }) {
     if (score) {
       onFinish(score)
     } else {
-      setFeedback('That answer isn’t in the quiz’s sample. Try another.')
+      setFeedback('Answer not listed. Try again.')
     }
   }
 
@@ -62,10 +63,6 @@ export function Question({ questionIndex = 0, deadline, onFinish }) {
         <input id="answer" name="answer" type="text" autoComplete="off" autoFocus required />
         <button type="submit">Submit</button>
         {feedback && <p role="alert">{feedback}</p>}
-        <small>
-          Sampled trivia adapted from <a href="https://github.com/StruggleYang/krillion-dataset" target="_blank" rel="noreferrer">KrillionHQ</a>{' '}
-          (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>).
-        </small>
       </form>
     </div>
   )

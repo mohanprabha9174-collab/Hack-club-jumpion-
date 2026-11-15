@@ -7,7 +7,7 @@
   --boundary-color: #6b6b6b;
   --camera-y: 0px;
   --platform-gap: min(120px, 12.5svh);
-  --cloud-elevation: calc(8px + var(--platform-count) * var(--platform-gap) + 270px);
+  --cloud-elevation: calc(8px + var(--platform-count) * var(--platform-gap) + 520px);
   position: relative;
   height: 100svh;
   overflow: hidden;
@@ -206,3 +206,24 @@
 .win-box {
   text-align: center;
 }
+
+.double-jump-icon {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  left: calc(75% + 8px);
+  width: 48px;
+  height: 48px;
+  image-rendering: pixelated;
+}
+
+
+.princess-peaches {
+  position: absolute;
+  left: calc(50% + 105px);
+  bottom: calc(var(--ground-height) + var(--cloud-elevation) - 48px);
+  width: 88px;
+  height: auto;
+  image-rendering: pixelated;
+}
+
