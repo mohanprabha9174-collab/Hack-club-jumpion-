@@ -1,0 +1,52 @@
+[
+ {
+  "question": "Name something that bounces back.",
+  "top": ["basketball|basket ball", "rubber ball|ball|bouncy ball|superball", "trampoline"],
+  "common": ["tennis ball", "soccer ball|football", "ping pong ball|table tennis ball", "volleyball"],
+  "uncommon": ["spring|coil spring", "pogo stick", "yo-yo|yoyo", "person|people|human", "rubber band|elastic band"],
+  "rare": ["echo", "boomerang", "stock market|stocks", "diving board|springboard", "memory foam", "shock absorber", "sound wave"],
+  "secret": ["jumpion"]
+ },
+ {
+  "question": "Name something that has fallen from the sky.",
+  "top": ["rain|raindrops|rain drops", "snow|snowflake|snowflakes", "hail|hailstone|hailstones"],
+  "common": ["meteor|meteorite|shooting star", "bird|birds", "airplane|plane|aircraft"],
+  "uncommon": ["leaf|leaves", "ash|volcanic ash", "dust|sand", "icicle|icicles", "coconut|coconuts"],
+  "rare": ["satellite|satellite debris|space debris|space junk", "frog|frogs", "fish", "blue ice", "spider|spiders", "pollen", "volcanic rock"]
+ },
+ {
+  "question": "Name something you’d want to fall onto.",
+  "top": ["bed|mattress", "pillow|pillows", "trampoline"],
+  "common": ["couch|sofa", "pool|swimming pool|water", "blanket", "foam pit|foam"],
+  "uncommon": ["airbag|air bag", "safety net|net", "hay|hay bale|haystack", "beanbag|bean bag", "snow|snowbank"],
+  "rare": ["giant marshmallow|marshmallow", "crash mat|crash pad|gym mat|gymnastics mat", "pile of leaves|leaves|leaf pile", "ball pit", "inflatable slide|bounce house", "stunt bag"]
+ },
+ {
+  "question": "Name something that returns every year no matter what.",
+  "top": ["birthday|birthdays|my birthday", "christmas|christmas day", "new year|new years|new years day"],
+  "common": ["summer", "winter", "spring", "fall|autumn", "halloween", "thanksgiving"],
+  "uncommon": ["tax day|taxes", "anniversary", "school|school year|back to school", "valentines day", "independence day|fourth of july|july 4"],
+  "rare": ["perseid meteor shower|perseids", "solstice|summer solstice|winter solstice", "equinox|spring equinox|autumn equinox", "monarch migration|monarch butterflies", "cherry blossoms|cherry blossom season", "hurricane season"]
+ },
+ {
+  "question": "Name a video game mechanic that lets you come back from losing.",
+  "top": ["respawn|respawning", "extra life|extra lives|one up|1 up|1up", "checkpoint|checkpoints"],
+  "common": ["continue|continues", "restart|retry|restart level|try again", "reload save|load save|save point"],
+  "uncommon": ["revive|revival|resurrection", "rewind|time rewind", "second chance|second wind", "regeneration|health regeneration"],
+  "rare": ["comeback meter|revenge meter", "rubber banding|rubberbanding", "rollback|reset loop|time loop", "buyback|buy back", "revival shrine|revive beacon|respawn beacon", "auto revive"]
+ },
+ {
+  "question": "Name something that’s far away but still guides people.",
+  "top": ["north star|polaris", "lighthouse|light house", "sun"],
+  "common": ["moon", "gps|gps satellite|satellite", "stars|star"],
+  "uncommon": ["mountain|mountain peak|mountains", "radio beacon|radio tower", "constellation|constellations", "smoke signal|smoke signals"],
+  "rare": ["southern cross|crux", "big dipper|ursa major", "orion|orions belt|orion belt", "range lights|leading lights|leading light", "pulsar|pulsars", "city skyline|skyline"]
+ },
+ {
+  "question": "Name something in nature that jumps.",
+  "top": ["frog|frogs", "kangaroo|kangaroos", "rabbit|rabbits|bunny|bunnies"],
+  "common": ["grasshopper|grasshoppers", "cricket|crickets", "fish", "dolphin|dolphins"],
+  "uncommon": ["flea|fleas", "goat|mountain goat", "deer", "salmon", "jumping spider|spider"],
+  "rare": ["springtail|springtails", "kangaroo rat|kangaroo rats", "jerboa|jerboas", "mudskipper|mudskippers", "click beetle|click beetles", "flying fish", "sifaka|lemur"]
+ }
+]
