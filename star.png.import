@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://omqh11mm11q7"
-path="res://.godot/imported/Trampoline.png-2b4df9e82bc9acfa55179eca23ce3f76.ctex"
+uid="uid://cx0ia7wud5ibr"
+path="res://.godot/imported/star.png-4190b3626a6c7b5ad7d41e6ea327e40a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Trampoline.png"
-dest_files=["res://.godot/imported/Trampoline.png-2b4df9e82bc9acfa55179eca23ce3f76.ctex"]
+source_file="res://star.png"
+dest_files=["res://.godot/imported/star.png-4190b3626a6c7b5ad7d41e6ea327e40a.ctex"]
 
 [params]
 
