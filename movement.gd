@@ -1,6 +1,6 @@
 extends Node2D
 
-const PIXELS_PER_METER = 6
+const PIXELS_PER_METER = 9
 const REST_X = 585.0
 const CAMERA_OFFSET = -36.0
 
@@ -36,7 +36,7 @@ func climb(meters: int, use_trampoline: bool) -> void:
 		motion.play("trampoline_release")
 
 	var rise = meters * PIXELS_PER_METER
-	var airtime = clampf(0.60 + meters * 0.010, 0.68, 1.60)
+	var airtime = 0.62 + meters * 0.014
 	var launch = create_tween().set_parallel(true)
 	launch.tween_property(star, "position:y", -rise, airtime).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	if use_trampoline:

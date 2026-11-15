@@ -1,13 +1,13 @@
 extends Node2D
 
-const STAR_HEIGHT = 180
-const BOUNCE_MINIMUM = 30
+const STAR_HEIGHT = 120
+const BOUNCE_MINIMUM = 20
 const ANSWER_TYPES = {
 	"top": {"meters": -20, "label": "Top 3 answer"},
 	"common": {"meters": 10, "label": "Less common"},
-	"uncommon": {"meters": 30, "label": "Uncommon"},
-	"rare": {"meters": 60, "label": "Rare"},
-	"secret": {"meters": 100, "label": "Secret answer!"},
+	"uncommon": {"meters": 20, "label": "Uncommon"},
+	"rare": {"meters": 30, "label": "Rare"},
+	"secret": {"meters": 30, "label": "Secret answer!"},
 }
 
 @onready var questions: Array = preload("res://answers.json").data
