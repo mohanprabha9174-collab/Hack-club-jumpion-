@@ -13,7 +13,10 @@ const CAMERA_OFFSET = -36.0
 
 func intro() -> void:
 	motion.play("fall_to_earth")
+	motion.advance(0)
+	camera.force_update_scroll()
 	await motion.animation_finished
+	star.rotation_degrees = 0.0
 	float_anim.play("float")
 
 
@@ -28,6 +31,7 @@ func bounce(meters: int) -> void:
 	var launch = create_tween().set_parallel(true)
 	launch.tween_property(star, "position:y", -rise, airtime).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	launch.tween_property(star, "position:x", HOME_X, airtime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	launch.tween_property(star, "rotation_degrees", 360.0, airtime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	# Let Jumpion get ahead of the camera before it catches up.
 	launch.tween_property(camera, "position:y", CAMERA_OFFSET - rise, airtime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await launch.finished
@@ -58,7 +62,8 @@ func stop_float() -> void:
 func move_stage(y_change: float) -> void:
 	position.y += y_change
 	star.position = Vector2(HOME_X, 0)
+	star.rotation_degrees = 0.0
 	camera.position.y = CAMERA_OFFSET
-	pad.hide()
+	pad.visible = is_zero_approx(position.y)
 	camera.force_update_scroll()
 	float_anim.play("float")

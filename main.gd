@@ -7,6 +7,7 @@ const METERS = [-20, 10, 30, 60, 100]
 const LABELS = ["Top 3 answer", "Less common", "Uncommon", "Rare", "Secret answer!"]
 
 @onready var stage = $Stage
+@onready var hud: CanvasLayer = $HUD
 @onready var question: Label = $HUD/Panel/Question
 @onready var round_label: Label = $HUD/Panel/Round
 @onready var answer_box: LineEdit = $HUD/Panel/Answer
@@ -26,6 +27,7 @@ func _ready() -> void:
 	goal.text = "Goal: %d m" % STAR_HEIGHT
 	show_question()
 	await stage.intro()
+	hud.show()
 	unlock_answer()
 
 

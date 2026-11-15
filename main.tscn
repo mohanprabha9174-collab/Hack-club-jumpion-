@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://omqh11mm11q7" path="res://Trampoline.png" id="3_lquwl"]
 [ext_resource type="Script" uid="uid://b7vkul1hw5ksn" path="res://trampoline.gd" id="4_1bvp3"]
 [ext_resource type="Script" path="res://main.gd" id="1_main"]
+[ext_resource type="Texture2D" path="res://level-map.webp" id="5_map"]
 
 [sub_resource type="Animation" id="Animation_RESET"]
 resource_name = "RESET"
@@ -95,7 +96,7 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_fall_to_earth"]
 resource_name = "fall_to_earth"
-length = 1.54
+length = 2.85
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -103,10 +104,10 @@ tracks/0/path = NodePath("Jumpion:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.65, 0.85, 1.1, 1.54),
-"transitions": PackedFloat32Array(2.3, 0.45, 1.8, 0.65, 1),
+"times": PackedFloat32Array(0, 0.38, 0.57, 0.95, 1.5, 2.04, 2.2, 2.43, 2.57, 2.85),
+"transitions": PackedFloat32Array(1, 0.65, 1.75, 1.05, 1.0, 0.85, 0.5, 1.5, 0.6, 1),
 "update": 0,
-"values": [Vector2(570, -260), Vector2(585, 95), Vector2(585, 42), Vector2(585, 56), Vector2(585, 0)]
+"values": [Vector2(625, -1081), Vector2(625, -1081), Vector2(629, -1093), Vector2(661, -949), Vector2(642, -455), Vector2(590, -61), Vector2(585, 50), Vector2(585, -14), Vector2(585, 12), Vector2(585, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -115,10 +116,10 @@ tracks/1/path = NodePath("Jumpion:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.29, 0.61, 0.67),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.38, 0.57, 0.95, 1.5, 2.02, 2.2, 2.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [-18.0, -12.0, 5.0, 0.0]
+"values": [0.0, 0.0, -18.0, 82.0, 225.0, 332.0, 360.0, 360.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -127,10 +128,46 @@ tracks/2/path = NodePath("Jumpion/Art:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.58, 0.65, 0.8, 1.15),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.38, 0.75, 2.08, 2.2, 2.35, 2.56, 2.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0.94, 1.12), Vector2(0.94, 1.13), Vector2(1.26, 0.68), Vector2(0.91, 1.1), Vector2(1, 1)]
+"values": [Vector2(0.64, 0.64), Vector2(0.64, 0.64), Vector2(1, 1), Vector2(0.9, 1.1), Vector2(1.27, 0.69), Vector2(0.92, 1.1), Vector2(1.07, 0.91), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.52, 0.95, 1.5, 2.04, 2.3, 2.85),
+"transitions": PackedFloat32Array(1, 1.7, 1.1, 0.93, 1, 0.6, 1),
+"update": 0,
+"values": [Vector2(660, -1002), Vector2(660, -1002), Vector2(660, -880), Vector2(632, -418), Vector2(565, -36), Vector2(525, -36), Vector2(480, -36)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera2D:zoom")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.48, 1.6, 2.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.35, 1.35), Vector2(1.35, 1.35), Vector2(1.15, 1.15), Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Trampoline:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.42),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_toss_and_land"]
@@ -179,10 +216,10 @@ tracks/3/path = NodePath("Trampoline:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.16),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, true]
+"values": [true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -191,10 +228,10 @@ tracks/4/path = NodePath("Trampoline:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.16, 0.32, 0.56, 0.64, 0.73, 0.85, 0.96),
-"transitions": PackedFloat32Array(1, 0.7, 1.8, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.82, 0.96),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(613, -28), Vector2(613, -28), Vector2(675, -88), Vector2(718, 12), Vector2(718, 9), Vector2(718, 12), Vector2(718, 12), Vector2(718, 27)]
+"values": [Vector2(718, 12), Vector2(718, 12), Vector2(718, 27)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -203,10 +240,10 @@ tracks/5/path = NodePath("Trampoline:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.16, 0.36, 0.56),
+"times": PackedFloat32Array(0, 0.45, 0.82, 0.96),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [-24.0, -24.0, 13.0, 0.0]
+"values": [0.0, -7.0, 0.0, 0.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -215,10 +252,10 @@ tracks/6/path = NodePath("Trampoline:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.16, 0.5, 0.85, 0.96),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.82, 0.96),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0.33, 0.33), Vector2(0.33, 0.33), Vector2(1, 1), Vector2(1, 1), Vector2(1.2, 0.78)]
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.2, 0.78)]
 }
 
 [sub_resource type="Animation" id="Animation_trampoline_release"]
@@ -339,136 +376,10 @@ script = ExtResource("1_main")
 [node name="World" type="Node2D" parent="."]
 z_index = -2
 
-[node name="Earth" type="Polygon2D" parent="World"]
-color = Color(0.068, 0.125, 0.166, 1)
-polygon = PackedVector2Array(0, 95, 960, 95, 960, 700, 0, 700)
-
-[node name="Horizon" type="Line2D" parent="World"]
-points = PackedVector2Array(0, 95, 960, 95)
-width = 2.0
-default_color = Color(0.20, 0.38, 0.43, 1)
-
-[node name="Mark0" type="Line2D" parent="World"]
-points = PackedVector2Array(488, 0, 885, 0)
-width = 1.0
-default_color = Color(0.28, 0.37, 0.55, 0.46)
-
-[node name="Level0" type="Label" parent="World"]
-offset_left = 894.0
-offset_top = -11.0
-offset_right = 952.0
-offset_bottom = 13.0
-mouse_filter = 2
-theme_override_font_sizes/font_size = 13
-text = "0 m"
-
-[node name="Mark60" type="Line2D" parent="World"]
-points = PackedVector2Array(488, -360, 885, -360)
-width = 1.0
-default_color = Color(0.28, 0.37, 0.55, 0.46)
-
-[node name="Level60" type="Label" parent="World"]
-offset_left = 894.0
-offset_top = -371.0
-offset_right = 952.0
-offset_bottom = -347.0
-mouse_filter = 2
-theme_override_font_sizes/font_size = 13
-text = "60 m"
-
-[node name="Mark120" type="Line2D" parent="World"]
-points = PackedVector2Array(488, -720, 885, -720)
-width = 1.0
-default_color = Color(0.28, 0.37, 0.55, 0.46)
-
-[node name="Level120" type="Label" parent="World"]
-offset_left = 894.0
-offset_top = -731.0
-offset_right = 952.0
-offset_bottom = -707.0
-mouse_filter = 2
-theme_override_font_sizes/font_size = 13
-text = "120 m"
-
-[node name="Mark180" type="Line2D" parent="World"]
-points = PackedVector2Array(435, -1080, 885, -1080)
-width = 1.0
-default_color = Color(0.55, 0.44, 0.23, 0.75)
-
-[node name="Level180" type="Label" parent="World"]
-offset_left = 894.0
-offset_top = -1091.0
-offset_right = 952.0
-offset_bottom = -1067.0
-mouse_filter = 2
-theme_override_font_sizes/font_size = 13
-text = "180 m"
-
-[node name="GoalLine" type="Label" parent="World"]
-offset_left = 754.0
-offset_top = -1110.0
-offset_right = 884.0
-offset_bottom = -1084.0
-mouse_filter = 2
-theme_override_font_sizes/font_size = 15
-text = "HOME"
-horizontal_alignment = 2
-
-[node name="Mark240" type="Line2D" parent="World"]
-points = PackedVector2Array(488, -1440, 885, -1440)
-width = 1.0
-default_color = Color(0.28, 0.37, 0.55, 0.46)
-
-[node name="Level240" type="Label" parent="World"]
-offset_left = 894.0
-offset_top = -1451.0
-offset_right = 952.0
-offset_bottom = -1427.0
-mouse_filter = 2
-theme_override_font_sizes/font_size = 13
-text = "240 m"
-
-[node name="Mark300" type="Line2D" parent="World"]
-points = PackedVector2Array(488, -1800, 885, -1800)
-width = 1.0
-default_color = Color(0.28, 0.37, 0.55, 0.46)
-
-[node name="Level300" type="Label" parent="World"]
-offset_left = 894.0
-offset_top = -1811.0
-offset_right = 952.0
-offset_bottom = -1787.0
-mouse_filter = 2
-theme_override_font_sizes/font_size = 13
-text = "300 m"
-
-[node name="Mark360" type="Line2D" parent="World"]
-points = PackedVector2Array(488, -2160, 885, -2160)
-width = 1.0
-default_color = Color(0.28, 0.37, 0.55, 0.46)
-
-[node name="Level360" type="Label" parent="World"]
-offset_left = 894.0
-offset_top = -2171.0
-offset_right = 952.0
-offset_bottom = -2147.0
-mouse_filter = 2
-theme_override_font_sizes/font_size = 13
-text = "360 m"
-
-[node name="Mark420" type="Line2D" parent="World"]
-points = PackedVector2Array(488, -2520, 885, -2520)
-width = 1.0
-default_color = Color(0.28, 0.37, 0.55, 0.46)
-
-[node name="Level420" type="Label" parent="World"]
-offset_left = 894.0
-offset_top = -2531.0
-offset_right = 952.0
-offset_bottom = -2507.0
-mouse_filter = 2
-theme_override_font_sizes/font_size = 13
-text = "420 m"
+[node name="LevelMap" type="Sprite2D" parent="World"]
+position = Vector2(482, -1142)
+texture = ExtResource("5_map")
+centered = false
 
 [node name="Stage" type="Node2D" parent="."]
 script = ExtResource("4_1bvp3")
@@ -483,7 +394,7 @@ texture = ExtResource("3_lquwl")
 offset = Vector2(0, 24)
 
 [node name="Jumpion" type="Node2D" parent="Stage"]
-position = Vector2(570, -260)
+position = Vector2(625, -1081)
 
 [node name="Art" type="Node2D" parent="Stage/Jumpion"]
 
@@ -499,9 +410,11 @@ libraries/ = SubResource("AnimationLibrary_float")
 libraries/ = SubResource("AnimationLibrary_motion")
 
 [node name="Camera2D" type="Camera2D" parent="Stage"]
-position = Vector2(480, -36)
+position = Vector2(660, -1002)
+zoom = Vector2(1.35, 1.35)
 
 [node name="HUD" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Title" type="Label" parent="HUD"]
 offset_left = 38.0
