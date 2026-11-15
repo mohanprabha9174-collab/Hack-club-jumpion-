@@ -1,4 +1,6 @@
 .stage {
+  --stary-x: 0px;
+  --stary-y: 0px;
   --intro-duration: 1.2s;
   --ground-height: 64px;
   --wall-width: 16px;
@@ -50,7 +52,6 @@
   bottom: var(--ground-height);
   width: var(--wall-width);
   translate: -50% 0;
-  background: var(--boundary-color);
 }
 
 .wall-left {
@@ -61,12 +62,28 @@
   left: 75%;
 }
 
+.platform {
+  --platform-thickness: 16px;
+  position: absolute;
+  left: 65%;
+  bottom: calc(var(--ground-height) + var(--platform-elevation) - var(--platform-thickness));
+  width: min(112px, calc(10% - var(--wall-width) / 2));
+  height: var(--platform-thickness);
+}
+
 .ground {
   grid-row: 2;
   justify-self: stretch;
+}
+
+.wall,
+.platform,
+.ground {
   background: var(--boundary-color);
 }
 
+/* The fall and bubble reveal share one duration.
+   https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@keyframes */
 @media (prefers-reduced-motion: no-preference) {
   .text-bubble {
     animation: show-bubble var(--intro-duration) step-end;
