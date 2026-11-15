@@ -1,9 +1,13 @@
 .stage {
   --intro-duration: 1.2s;
+  --ground-height: 64px;
+  --wall-width: 16px;
+  --boundary-color: #6b6b6b;
   position: relative;
   display: grid;
   min-height: 100svh;
-  place-items: center;
+  grid-template-rows: 1fr var(--ground-height);
+  justify-items: center;
   background: url('./assets/night-forest.jpg') center / cover no-repeat;
 }
 
@@ -22,16 +26,45 @@
 }
 
 .stary {
+  align-self: end;
+  max-width: calc(50% - var(--wall-width));
+  height: auto;
+  translate: var(--stary-x) var(--stary-y);
   image-rendering: pixelated;
 }
 
 .text-bubble {
+  --bubble-width: min(240px, 50%);
   position: absolute;
-  bottom: calc(50% + 44px);
-  left: calc(50% - 12px);
-  width: min(240px, 50%);
+  bottom: calc(var(--ground-height) + 128px);
+  left: min(calc(50% - 12px + var(--stary-x)), calc(100% - var(--bubble-width)));
+  width: var(--bubble-width);
+  translate: 0 var(--stary-y);
   height: auto;
   image-rendering: pixelated;
+}
+
+.wall {
+  position: absolute;
+  top: 0;
+  bottom: var(--ground-height);
+  width: var(--wall-width);
+  translate: -50% 0;
+  background: var(--boundary-color);
+}
+
+.wall-left {
+  left: 25%;
+}
+
+.wall-right {
+  left: 75%;
+}
+
+.ground {
+  grid-row: 2;
+  justify-self: stretch;
+  background: var(--boundary-color);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -46,7 +79,7 @@
 
 @keyframes stary-fall {
   from {
-    transform: translateY(calc(-50svh - 50%)) rotate(-1turn);
+    transform: translateY(-100svh) rotate(-4turn);
   }
 
   to {
