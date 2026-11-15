@@ -1,12 +1,12 @@
 # Jumpion
 
-Help a fallen star get back home. Answer seven questions and finish at 180 m or higher.
+Help a fallen star get back home. Answer seven questions and finish at 120 m or higher.
 
 ## Play
 
 1. Open Godot 4.6 and click **Import**.
 2. Pick `project.godot` and press **F5**.
-3. Type a guess and press **Enter**. The three most obvious guesses cost 20 m. A less common guess adds 10 m. Rarer guesses give you a trampoline jump worth 30, 60 or 100 m.
+3. Type a guess and press **Enter**. The three most obvious guesses cost 20 m. A less common guess adds 10 m. Uncommon guesses give you a 20 m trampoline jump. Rare and secret guesses give you a 30 m jump.
 4. Try another guess or click **Skip** if the game doesn't know your answer.
 
 ## Edit
