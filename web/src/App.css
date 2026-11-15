@@ -1,17 +1,46 @@
 .stage {
+  --intro-duration: 1.2s;
+  position: relative;
   display: grid;
   min-height: 100svh;
   place-items: center;
   background: url('./assets/night-forest.jpg') center / cover no-repeat;
 }
 
+.title {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  margin: 0;
+}
+
+.title img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 .stary {
   image-rendering: pixelated;
 }
 
+.text-bubble {
+  position: absolute;
+  bottom: calc(50% + 44px);
+  left: calc(50% - 12px);
+  width: min(240px, 50%);
+  height: auto;
+  image-rendering: pixelated;
+}
+
 @media (prefers-reduced-motion: no-preference) {
+  .text-bubble {
+    animation: show-bubble var(--intro-duration) step-end;
+  }
+
   .stary {
-    animation: stary-fall 1.2s ease-in-out;
+    animation: stary-fall var(--intro-duration) ease-in-out;
   }
 }
 
@@ -22,5 +51,15 @@
 
   to {
     transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes show-bubble {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
